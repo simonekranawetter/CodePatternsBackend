@@ -7,5 +7,13 @@ namespace CodePatternsBackend.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        private readonly ILogger<ProductsController> _logger;
+        private readonly SqlContext _context;
+
+        public ProductsController(ILogger<ProductsController> logger, SqlContext context)
+        {
+            _logger = logger;
+            _context = context;
+        }
     }
 }
