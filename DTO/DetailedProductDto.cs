@@ -1,15 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using CodePatternsBackend.Interfaces;
 
-namespace CodePatternsBackend.Entities
+namespace CodePatternsBackend.DTO
 {
-    public class ProductEntity
+    // TODO COMMENT THIS INTERFACE SEGGREGATION
+    public class DetailedProductDto : IProduct
     {
-        [Key]
         public int Id { get; set; }
         public int Rating { get; set; }
         [Required]
-        public string Picture { get; set; } = "https://images.pexels.com/photos/1303084/pexels-photo-1303084.jpeg";
+        public string Picture { get; set; }
         [Required]
         public string ProductName { get; set; } = null!;
         [Required]
@@ -21,10 +23,8 @@ namespace CodePatternsBackend.Entities
         [Required]
         public string Sizes { get; set; } = null!;
         [Required]
-        [Column(TypeName ="money")]
+        [Column(TypeName = "money")]
         public decimal Price { get; set; }
-        public ProductCategoryEntity Category { get; set; } = null!;
-        public int ProductCategoryEntityId { get; set; }
-
+        public string Category { get; set; } = null!;
     }
 }

@@ -1,4 +1,5 @@
-﻿using CodePatternsBackend.DTO;
+﻿using CodePatternsBackend.Data;
+using CodePatternsBackend.DTO;
 using CodePatternsBackend.Entities;
 using CodePatternsBackend.Mappings;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +10,7 @@ namespace CodePatternsBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //Dependency inversion TODO COMMMENT THIS!
     public class ProductsController : ControllerBase
     {
         private readonly ILogger<ProductsController> _logger;
@@ -21,7 +23,7 @@ namespace CodePatternsBackend.Controllers
         }
 
         [HttpGet(Name = "GetAllProducts")]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts(string? category)
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts(string? category)
         {
             IQueryable<ProductEntity> productQuery = _context.Products.Include(p => p.Category);
 
@@ -35,14 +37,14 @@ namespace CodePatternsBackend.Controllers
 
             foreach (var productEntity in productEntities)
             {
-                var productDto = productEntity.MapToEntity();
+                var productDto = productEntity.MaptoProductDto();
                 productDtos.Add(productDto);
             }
             return Ok(productDtos);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductDto>> GetProduct(int id)
+        public async Task<ActionResult<DetailedProductDto>> GetProduct(int id)
         {
             var productEntity = await _context.Products.Include(p => p.Category).FirstOrDefaultAsync(p => p.Id == id);
 
@@ -51,7 +53,7 @@ namespace CodePatternsBackend.Controllers
                 return NotFound();
             }
 
-            var productDto = productEntity.MapToDto();
+            var productDto = productEntity.MapToDetailedProductDto();
 
             return Ok(productDto);
         }

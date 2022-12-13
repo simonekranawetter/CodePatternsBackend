@@ -1,8 +1,8 @@
 ﻿using CodePatternsBackend.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CodePatternsBackend
-{
+namespace CodePatternsBackend.Data
+{ //todo add Liskov comment
     public class SqlContext : DbContext
     {
         public SqlContext(DbContextOptions<SqlContext> options) : base(options) { }
