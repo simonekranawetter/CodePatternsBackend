@@ -5,7 +5,7 @@ using CodePatternsBackend.Interfaces;
 
 namespace CodePatternsBackend.DTO
 {
-    // TODO COMMENT THIS INTERFACE SEGGREGATION
+    // TODO COMMENT THIS open close principle
     public class DetailedProductDto : IProduct
     {
         public int Id { get; set; }
