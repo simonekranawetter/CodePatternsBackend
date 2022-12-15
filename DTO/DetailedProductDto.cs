@@ -5,7 +5,8 @@ using CodePatternsBackend.Interfaces;
 
 namespace CodePatternsBackend.DTO
 {
-    // TODO COMMENT THIS open close principle
+    // OPEN CLOSED PRINCIPLE
+    // Classes should be open for extension but closed for modification, this is why I added another DTO here to only request detailed information when needed and this also extends the ProductDto instead of having to change the ProductDto
     public class DetailedProductDto : IProduct
     {
         public int Id { get; set; }

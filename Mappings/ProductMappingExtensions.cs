@@ -3,7 +3,8 @@ using CodePatternsBackend.Entities;
 using System.Runtime.CompilerServices;
 
 namespace CodePatternsBackend.Mappings
-{ //COMMENT THIS SINGLE RESPONSIBILITY
+{   //SINGLE RESPONSIBILITY
+    //Single Responsibility Principle: With that in mind I made mappings myself, to break them out of the Controller and make this class responsible for one thing which is Mappings.
     public static class ProductMappingExtensions
     {
         public static DetailedProductDto MapToDetailedProductDto(this ProductEntity productEntity)

@@ -10,7 +10,8 @@ namespace CodePatternsBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //Dependency inversion TODO COMMMENT THIS!
+    //DEPENDENCY INVERSION
+    //To make the class more abstract logger and context are made private here 
     public class ProductsController : ControllerBase
     {
         private readonly ILogger<ProductsController> _logger;
