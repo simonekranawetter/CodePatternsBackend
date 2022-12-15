@@ -1,5 +1,6 @@
 ﻿using CodePatternsBackend.DTO;
 using CodePatternsBackend.Entities;
+using System.Runtime.CompilerServices;
 
 namespace CodePatternsBackend.Mappings
 { //COMMENT THIS SINGLE RESPONSIBILITY
@@ -24,7 +25,7 @@ namespace CodePatternsBackend.Mappings
             return productDto;
         }
 
-        public static ProductDto MaptoProductDto(this ProductEntity productEntity)
+        public static ProductDto MapToProductDto(this ProductEntity productEntity)
         {
             var productDto = new ProductDto
             {
@@ -38,5 +39,27 @@ namespace CodePatternsBackend.Mappings
 
             return productDto;
         }
+
+        public static ProductEntity MapToProductEntityWithNewCategory(this AddProductDto addProductDto)
+        {
+            var productEntity = new ProductEntity
+            {
+                Rating = addProductDto.Rating,
+                Picture = addProductDto.Picture,
+                ProductName = addProductDto.ProductName,
+                BrandName = addProductDto.BrandName,
+                Colors = addProductDto.Colors,
+                Sizes = addProductDto.Sizes,
+                Description = addProductDto.Description,
+                Price = addProductDto.Price,
+                Category = new ProductCategoryEntity
+                {
+                    Name = addProductDto.Category
+                }
+            };
+            return productEntity;
+        }
+
+
     }
 }

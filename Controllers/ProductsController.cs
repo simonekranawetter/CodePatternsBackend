@@ -37,7 +37,7 @@ namespace CodePatternsBackend.Controllers
 
             foreach (var productEntity in productEntities)
             {
-                var productDto = productEntity.MaptoProductDto();
+                var productDto = productEntity.MapToProductDto();
                 productDtos.Add(productDto);
             }
             return Ok(productDtos);
@@ -48,7 +48,7 @@ namespace CodePatternsBackend.Controllers
         {
             var productEntity = await _context.Products.Include(p => p.Category).FirstOrDefaultAsync(p => p.Id == id);
 
-            if (productEntity == null) 
+            if (productEntity == null)
             {
                 return NotFound();
             }
@@ -57,5 +57,44 @@ namespace CodePatternsBackend.Controllers
 
             return Ok(productDto);
         }
+
+        [HttpPost(Name = "AddProduct")]
+        public async Task<ActionResult<AddProductDto>> AddProduct(AddProductDto addProductDto)
+        {
+            if (await _context.Products.AnyAsync(p => p.ProductName == addProductDto.ProductName))
+            {
+                return BadRequest();
+            }
+            var productCategory = await _context.ProductCategories.FirstOrDefaultAsync(p => p.Name == addProductDto.Category);
+            ProductEntity productEntity;
+
+            if (productCategory == null)
+            {
+                productEntity = addProductDto.MapToProductEntityWithNewCategory();
+            }
+            //Todo figure out how to map this nicely
+            else 
+            {
+                productEntity = new ProductEntity
+                {
+                    Rating = addProductDto.Rating,
+                    Picture = addProductDto.Picture,
+                    ProductName = addProductDto.ProductName,
+                    BrandName = addProductDto.BrandName,
+                    Colors = addProductDto.Colors,
+                    Sizes = addProductDto.Sizes,
+                    Description = addProductDto.Description,
+                    Price = addProductDto.Price,
+                    ProductCategoryEntityId = productCategory.Id,
+                };
+            }
+
+            _context.Products.Add(productEntity);
+            await _context.SaveChangesAsync();
+
+            var detailedProductDto = productEntity.MapToDetailedProductDto();
+            return CreatedAtAction("GetProduct", new { id = productEntity.Id }, detailedProductDto);
+        }
     }
 }
+
