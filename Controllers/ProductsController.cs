@@ -11,7 +11,8 @@ namespace CodePatternsBackend.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //DEPENDENCY INVERSION
-    //To make the class more abstract logger and context are made private here 
+    //To make the class more abstract logger and context are made private here
+    //Also Single Responsibility Principle as far as possible
     public class ProductsController : ControllerBase
     {
         private readonly ILogger<ProductsController> _logger;
@@ -59,6 +60,8 @@ namespace CodePatternsBackend.Controllers
             return Ok(productDto);
         }
 
+        //This entire post request is only here so I could add stuff to the database for testing purposes
+        //I tried to make it as dry as possible but haven't figured out the mapping for the below fully yet
         [HttpPost(Name = "AddProduct")]
         public async Task<ActionResult<AddProductDto>> AddProduct(AddProductDto addProductDto)
         {

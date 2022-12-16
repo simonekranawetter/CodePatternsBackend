@@ -2,7 +2,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CodePatternsBackend.Entities
-{
+{   //SRP and OCP
+    //This class is only responsible for Product Entity and is Extended by Product Category table
     public class ProductEntity
     {
         [Key]

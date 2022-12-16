@@ -5,6 +5,8 @@ using CodePatternsBackend.Interfaces;
 
 namespace CodePatternsBackend.DTO
 {
+    //Breaking out DTO's to have more control over what is used when
+    //This one is only used during the POST request
     public class AddProductDto : IProduct
     {
         public int Rating { get; set; }

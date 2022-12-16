@@ -7,6 +7,7 @@ namespace CodePatternsBackend.DTO
 {
     // OPEN CLOSED PRINCIPLE
     // Classes should be open for extension but closed for modification, this is why I added another DTO here to only request detailed information when needed and this also extends the ProductDto instead of having to change the ProductDto
+    // Having this here to extend the existing Product for the detailed view
     public class DetailedProductDto : IProduct
     {
         public int Id { get; set; }

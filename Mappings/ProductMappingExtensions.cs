@@ -5,6 +5,8 @@ using System.Runtime.CompilerServices;
 namespace CodePatternsBackend.Mappings
 {   //SINGLE RESPONSIBILITY
     //Single Responsibility Principle: With that in mind I made mappings myself, to break them out of the Controller and make this class responsible for one thing which is Mappings.
+    // I also made mappings to keep it DRY and avoid repeating the same thing over and over
+    // This also helps to keep the Controllers down to the most basic functionality so Controllers are easier to read
     public static class ProductMappingExtensions
     {
         public static DetailedProductDto MapToDetailedProductDto(this ProductEntity productEntity)

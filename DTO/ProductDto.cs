@@ -5,7 +5,10 @@ using CodePatternsBackend.Interfaces;
 
 namespace CodePatternsBackend.DTO
 {
-    // TODO COMMENT THIS INTERFACE SEGGREGATION
+    // INTERFACE SEGGREGATION
+    // This is used in the getallProducts request and in the Post
+    // Using the IProduct interface to make sure I use everything I need.
+    // In a project this size with DTOs I would normally skip the Interface to make it DRY
     public class ProductDto : IProduct
     {
         public int Id { get; set; }
